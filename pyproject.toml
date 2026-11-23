@@ -5,6 +5,13 @@ description = "A small decoder-only Transformer in JAX: data-parallel training w
 requires-python = ">=3.10"
 dependencies = ["jax>=0.4.30", "optax>=0.2", "numpy"]
 
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["tinyformer"]
+
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]
 
