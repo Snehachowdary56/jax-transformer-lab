@@ -1,0 +1,32 @@
+{
+  "devices": 8,
+  "steps_per_phase": 1500,
+  "batch": 128,
+  "config": {
+    "vocab": 15,
+    "max_digits": 2,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "d_ff": 512,
+    "seq_len": 10
+  },
+  "phase_a": {
+    "seconds": 69.3,
+    "final_loss": 0.0361,
+    "acc_add": 0.951,
+    "acc_sub": 0.015
+  },
+  "naive": {
+    "acc_add": 0.011,
+    "acc_sub": 1.0
+  },
+  "replay": {
+    "acc_add": 0.888,
+    "acc_sub": 0.999
+  },
+  "xla": {
+    "all_reduce_ops": 2,
+    "stablehlo_lines": 1865
+  }
+}

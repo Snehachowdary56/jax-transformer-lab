@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      XLA_FLAGS: --xla_force_host_platform_device_count=8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]" "jax[cpu]"
+      - run: ruff check . && ruff format --check .
+      - name: Tests (data-parallel tests run on 8 simulated devices)
+        run: pytest -v
+      - name: Short experiment run (300 steps per phase) to check the scripts end to end
+        run: STEPS=300 python scripts/run_experiments.py > /tmp/run.log && tail -25 /tmp/run.log
